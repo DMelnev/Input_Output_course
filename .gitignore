@@ -28,3 +28,4 @@ hs_err_pid*
 /InputOutput/.gradle/
 /InputOutput/gradlew
 /InputOutput/gradlew.bat
+/InputOutput/build/
