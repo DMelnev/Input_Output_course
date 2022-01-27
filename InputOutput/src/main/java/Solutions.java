@@ -16,14 +16,14 @@ class Solutions {
     public int romanToInt(String s) {
         String next;
         String point;
-        Integer sum = 0;
+        int sum = 0;
         if (s.length() > 0) {
             next = s.substring(0, s.length() - 1);
             point = s.substring(s.length() - 1);
         } else {
             return 0;
         }
-
+        System.out.println(point);
         switch (point) {
             case "M":
                 sum += 1000;
@@ -42,14 +42,16 @@ class Solutions {
                 L = true;
                 X = false;
             case "X":
-                sum += (L || C) ? -10 : 10;
+//                sum += (L || C) ? -10 : 10;
+                sum += 10;
                 V = false;
                 X = true;
             case "V":
                 sum += 5;
                 V = true;
             case "I":
-                sum += (V || X) ? -1 : 1;
+                sum += 1;
+//                sum += (V || X) ? -1 : 1;
         }
         return sum + romanToInt(next);
     }

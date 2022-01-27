@@ -11,14 +11,14 @@ class SolutionsTest {
     @BeforeEach
     void setUp() {
         test = new String[]{
-                "III", "IV", "IX", "LVIII", "MCMXCIV",
+                "LVIII","III", "IV", "IX",  "MCMXCIV",
                 "I", "V", "X", "L", "C", "D", "M",
                 "MMM", "XXVII", "XL", "XC", "CD", "CM",
                 "XLI", "XLVI", "XLIX"
 
         };
         answer = new Integer[]{
-                3, 4, 9, 58, 1994,
+                58, 3, 4, 9, 1994,
                 1, 5, 10, 50, 100, 500, 1000,
                 3000, 27, 40, 90, 400, 900,
                 41, 46, 49
