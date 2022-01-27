@@ -12,20 +12,26 @@ class Solutions {
     private boolean C = false;
     private boolean D = false;
     private boolean M = false;
-    String next;
-    String point;
 
     public int romanToInt(String s) {
-
+        String next;
+        String point;
         int result = 0;
         if (s.length() > 1) {
-            next = s.substring(0,s.length()-1);
+            next = s.substring(0, s.length() - 1);
             point = s.substring(s.length() - 1);
         } else if (s.length() == 1) {
             next = "";
             point = s;
-        } else return 0;
-        System.out.println("point = " + point + "\n" + "next = " + next);
+        } else {
+            V = false;
+            X = false;
+            L = false;
+            C = false;
+            D = false;
+            M = false;
+            return 0;
+        }
 
         if (point.equals("M")) {
             result = 1000;
