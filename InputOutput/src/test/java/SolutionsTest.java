@@ -29,7 +29,7 @@ class SolutionsTest {
     @Test
     void romanToInt() {
         for (int i = 0; i < test.length; i++) {
-            assertEquals(answer[i], solutions.romanToInt(test[i]), "Error in " + i + " element");
+            assertEquals(answer[i], solutions.romanToInt(test[i]), "Error in " + (i + 1) + " element");
         }
 
     }
