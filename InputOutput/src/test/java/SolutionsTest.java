@@ -23,13 +23,14 @@ class SolutionsTest {
                 3000, 27, 40, 90, 400, 900,
                 41, 46, 49
         };
-        solutions = new Solutions();
+
     }
 
     @Test
     void romanToInt() {
         for (int i = 0; i < test.length; i++) {
-            assertEquals(answer[i], solutions.romanToInt(test[i]), "Error in " + (i + 1) + " element");
+            solutions = new Solutions();
+            assertEquals(answer[i], solutions.romanToInt(test[i]), "Error in " + (i) + " element");
         }
 
     }
