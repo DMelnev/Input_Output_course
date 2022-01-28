@@ -7,8 +7,8 @@
 
 public class Main {
     public static void main(String[] args) {
-        Solutions solutions = new Solutions();
-        System.out.println(solutions.romanToInt("MCMXCIV"));
+        Solution solution = new Solution();
+        System.out.println(solution.romanToInt("IIIIIIIIII"));
     }
 }
 
