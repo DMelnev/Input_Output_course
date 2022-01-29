@@ -13,6 +13,7 @@ class Solution2 {
                 return (double) nums1[0];
             if (n1 == 0 && n2 == 0)
                 return 0.0;
+
         }
 
         if (n1 == 1 && n2 == 1) return (double) (nums1[0] + nums2[0]) / 2;
