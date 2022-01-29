@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+
 /**
  * Class Solutions
  *
@@ -14,15 +18,17 @@ class Solutions {
     private boolean M = false;
 
     public int romanToInt(String s) {
+        char point;
         String next;
-        String point;
+
+        int len = s.length();
         int result = 0;
-        if (s.length() > 1) {
-            next = s.substring(0, s.length() - 1);
-            point = s.substring(s.length() - 1);
-        } else if (s.length() == 1) {
+        if (len > 1) {
+            next = s.substring(0, len - 1);
+            point = s.charAt(len - 1);
+        } else if (len == 1) {
             next = "";
-            point = s;
+            point = s.charAt(0);
         } else {
             V = false;
             X = false;
@@ -33,39 +39,62 @@ class Solutions {
             return 0;
         }
 
-        if (point.equals("M")) {
-            result = 1000;
-            D = false;
-            M = true;
-        }
-        if (point.equals("D")) {
-            result = 500;
-            D = true;
-            C = false;
-        }
-        if (point.equals("C")) {
-            result = (D || M) ? -100 : 100;
-            L = false;
-            C = true;
-        }
-        if (point.equals("L")) {
-            result += 50;
-            L = true;
-            X = false;
-        }
-        if (point.equals("X")) {
-            result = (L || C) ? -10 : 10;
-            V = false;
-            X = true;
-        }
-        if (point.equals("V")) {
-            result = 5;
-            V = true;
-        }
-        if (point.equals("I")) {
-            result = (V || X) ? -1 : 1;
+        switch (point) {
+            case 'M' -> {
+                result = 1000;
+                D = false;
+                M = true;
+            }
+            case 'D' -> {
+                result = 500;
+                D = true;
+                C = false;
+            }
+            case 'C' -> {
+                result = (D || M) ? -100 : 100;
+                L = false;
+                C = true;
+            }
+            case 'L' -> {
+                result = 50;
+                L = true;
+                X = false;
+            }
+            case 'X' -> {
+                result = (L || C) ? -10 : 10;
+                V = false;
+                X = true;
+            }
+            case 'V' -> {
+                result = 5;
+                V = true;
+            }
+            case 'I' -> result = (V || X) ? -1 : 1;
         }
         return (result + romanToInt(next));
     }
+}
 
+class Solution {
+    public int romanToInt(String s) {
+        ArrayList<Character> list = new ArrayList<>();
+        int result = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        for (String st : s.split("")) {
+            list.add(0, st.charAt(0));
+        }
+        for (char st : list) {
+            result += (map.get(st) >= (result - (2 * map.get(st)))) ? map.get(st) : -map.get(st);
+            System.out.println(st + " " + result + " " + ((map.get(st) >= (result - (2 * map.get(st)))) ? map.get(st) : -map.get(st)));
+        }
+        return result;
+    }
 }
