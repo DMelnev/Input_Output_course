@@ -49,7 +49,44 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        int[] array = new int[1000];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) (Math.random() * 1000);
+        }
+        for (int i : array) System.out.print(i + " ");
+        System.out.println();
+        System.out.println(bubleBest(array));
 
+        for (int i : array) System.out.print(i + " ");
+        System.out.println();
+        System.out.println(array.length);
+
+    }
+
+    static int bubleBest(int[] array) {
+        int count = 0;
+        int temp;
+        int next;
+        int element;
+        int i =0;
+//        for (int j = 0; j < 1; j++) {
+            while (i < (array.length - 1)) {
+                next = array[i + 1];
+                element = array[i];
+                if (element >= next) {
+                    temp = next;
+                    next = array[i];
+                    element = temp;
+                }
+                array[i] = element;
+                array[i + 1] = next;
+                count++;
+                if (i > 0 && array[i - 1] > element) {
+                    i--;
+                }else i++;
+            }
+//        }
+        return count;
     }
 }
 
