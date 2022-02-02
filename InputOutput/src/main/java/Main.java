@@ -1,6 +1,11 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class Main
@@ -46,14 +51,24 @@ public class Main {
 
         try (Reader reader = new InputStreamReader(new FileInputStream(file))){ //, StandardCharsets.UTF_8 - не работает!
             StringBuilder result = new StringBuilder();
-//            byte[] array = new byte[8];
-            int count = reader.read();
+//            byte[] array = new byte[16];
+            char[] array = new char[128];
+            int count = reader.read(array);
             while (count > 0) {
-//                result.append(new String(array,0,count));
-                result.append((char)count);
-                count = reader.read();
+                result.append(new String(array, 0, count));
+//                result.append((char)count);
+                count = reader.read(array);
             }
-            System.out.println(result.toString());
+//            List<String> names = new ArrayList<>(List.of((result.toString().split(" "))));
+            String[] names = result.toString().split(" ");
+//            names.stream()
+            Arrays.stream(names)
+                    .filter((n) -> n.startsWith("S"))
+                    .forEach(System.out::println);
+
+//            for(String as:names){
+//                System.out.println("- "+as);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
