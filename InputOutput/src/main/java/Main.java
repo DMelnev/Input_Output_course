@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -35,31 +36,43 @@ public class Main {
 //        }
 
         File file = new File("1.txt");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (InputStream inputStream = new FileInputStream(file);) {
-            int a = inputStream.read();
-            while (a != -1) {
-                System.out.print((char) a);
-                a = inputStream.read();
+//        try {
+//            file.createNewFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        long before = System.currentTimeMillis();
+//        try (InputStream inputStream = new FileInputStream(file);) {
+
+        try (Reader reader = new InputStreamReader(new FileInputStream(file))){ //, StandardCharsets.UTF_8 - не работает!
+            StringBuilder result = new StringBuilder();
+//            byte[] array = new byte[8];
+            int count = reader.read();
+            while (count > 0) {
+//                result.append(new String(array,0,count));
+                result.append((char)count);
+                count = reader.read();
             }
+            System.out.println(result.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int[] array = new int[100];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random() * 1000);
-        }
-        for (int i : array) System.out.print(i + " ");
-        System.out.println();
-        System.out.println(bubbleBest(array));
+        long after = System.currentTimeMillis();
+        System.out.println(after - before);
 
-        for (int i : array) System.out.print(i + " ");
-        System.out.println();
-        System.out.println(array.length);
+
+//        int[] array = new int[100];
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = (int) (Math.random() * 1000);
+////            array[i] = i;
+//        }
+//        for (int i : array) System.out.print(i + " ");
+//        System.out.println();
+//        System.out.println(bubbleBest(array));
+//
+//        for (int i : array) System.out.print(i + " ");
+//        System.out.println();
+//        System.out.println(array.length);
 
     }
 
@@ -68,23 +81,23 @@ public class Main {
         int temp;
         int next;
         int element;
-        int i =0;
-            while (i < (array.length - 1)) {
-                next = array[i + 1];
-                element = array[i];
-                if (element > next) {
-                    temp = next;
-                    next = array[i];
-                    element = temp;
+        int i = 0;
+        while (i < (array.length - 1)) {
+            next = array[i + 1];
+            element = array[i];
+            if (element > next) {
+                temp = next;
+                next = array[i];
+                element = temp;
 
-                }
-                array[i] = element;
-                array[i + 1] = next;
-                count++;
-                if (i > 0 && array[i - 1] > element) {
-                    i--;
-                }else i++;
             }
+            array[i] = element;
+            array[i + 1] = next;
+            count++;
+            if (i > 0 && array[i - 1] > element) {
+                i--;
+            } else i++;
+        }
         return count;
     }
 }
