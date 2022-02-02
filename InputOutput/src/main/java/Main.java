@@ -89,7 +89,7 @@ public class Main {
 //        System.out.println();
 //        System.out.println(array.length);
 
-        try (OutputStream outputStream = new FileOutputStream(file, true)) {
+        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file, true))) {
             String names = "\nBob John Nicol James Jarred Garry Pol Frodo Fil Nick Patrik Symon Serg";
             outputStream.write(names.getBytes());
         } catch (Exception e) {
