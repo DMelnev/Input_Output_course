@@ -1,9 +1,6 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -89,40 +86,65 @@ public class Main {
 //        System.out.println();
 //        System.out.println(array.length);
 
+//        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file, true))) {
+//            String names = "\nBob John Nicol James Jarred Garry Pol Frodo Fil Nick Patrik Symon Serg";
+//            outputStream.write(names.getBytes());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        Scanner input = new Scanner(System.in);
+        String a = "";
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file, true))) {
-            String names = "\nBob John Nicol James Jarred Garry Pol Frodo Fil Nick Patrik Symon Serg";
-            outputStream.write(names.getBytes());
+            while (!a.equals("Выход")) {
+                outputStream.write(a.getBytes());
+                a = input.next();
+                outputStream.write("\n".getBytes());
+            }
+            outputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        StringBuilder result = new StringBuilder();
+        char[] array = new char[32];
+        try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
+            int count = reader.read(array);
+            while (count > 0) {
+                result.append(new String(array, 0, count));
+//                result.append("\n");
+                count = reader.read(array);
+            }
+            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
     }
 
-    static int bubbleBest(int[] array) {
-        int count = 0;
-        int temp;
-        int next;
-        int element;
-        int i = 0;
-        while (i < (array.length - 1)) {
-            next = array[i + 1];
-            element = array[i];
-            if (element > next) {
-                temp = next;
-                next = array[i];
-                element = temp;
-
-            }
-            array[i] = element;
-            array[i + 1] = next;
-            count++;
-            if (i > 0 && array[i - 1] > element) {
-                i--;
-            } else i++;
-        }
-        return count;
-    }
+//    static int bubbleBest(int[] array) {
+//        int count = 0;
+//        int temp;
+//        int next;
+//        int element;
+//        int i = 0;
+//        while (i < (array.length - 1)) {
+//            next = array[i + 1];
+//            element = array[i];
+//            if (element > next) {
+//                temp = next;
+//                next = array[i];
+//                element = temp;
+//
+//            }
+//            array[i] = element;
+//            array[i + 1] = next;
+//            count++;
+//            if (i > 0 && array[i - 1] > element) {
+//                i--;
+//            } else i++;
+//        }
+//        return count;
+//    }
 }
 
 
