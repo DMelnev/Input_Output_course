@@ -45,35 +45,35 @@ public class Main {
 //            file.createNewFile();
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//        }
-        long before = System.currentTimeMillis();
-//        try (InputStream inputStream = new FileInputStream(file);) {
-
-        try (Reader reader = new InputStreamReader(new FileInputStream(file))){ //, StandardCharsets.UTF_8 - не работает!
-            StringBuilder result = new StringBuilder();
-//            byte[] array = new byte[16];
-            char[] array = new char[128];
-            int count = reader.read(array);
-            while (count > 0) {
-                result.append(new String(array, 0, count));
-//                result.append((char)count);
-                count = reader.read(array);
-            }
-//            List<String> names = new ArrayList<>(List.of((result.toString().split(" "))));
-            String[] names = result.toString().split(" ");
-//            names.stream()
-            Arrays.stream(names)
-                    .filter((n) -> n.startsWith("S"))
-                    .forEach(System.out::println);
-
-//            for(String as:names){
-//                System.out.println("- "+as);
+////        }
+//        long before = System.currentTimeMillis();
+////        try (InputStream inputStream = new FileInputStream(file);) {
+//
+//        try (Reader reader = new InputStreamReader(new FileInputStream(file))){ //, StandardCharsets.UTF_8 - не работает!
+//            StringBuilder result = new StringBuilder();
+////            byte[] array = new byte[16];
+//            char[] array = new char[128];
+//            int count = reader.read(array);
+//            while (count > 0) {
+//                result.append(new String(array, 0, count));
+////                result.append((char)count);
+//                count = reader.read(array);
 //            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        long after = System.currentTimeMillis();
-        System.out.println(after - before);
+////            List<String> names = new ArrayList<>(List.of((result.toString().split(" "))));
+//            String[] names = result.toString().split(" ");
+////            names.stream()
+//            Arrays.stream(names)
+//                    .filter((n) -> n.startsWith("S"))
+//                    .forEach(System.out::println);
+//
+////            for(String as:names){
+////                System.out.println("- "+as);
+////            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        long after = System.currentTimeMillis();
+//        System.out.println(after - before);
 
 
 //        int[] array = new int[100];
@@ -88,6 +88,14 @@ public class Main {
 //        for (int i : array) System.out.print(i + " ");
 //        System.out.println();
 //        System.out.println(array.length);
+
+        try (OutputStream outputStream = new FileOutputStream(file, true)) {
+            String names = "\nBob John Nicol James Jarred Garry Pol Frodo Fil Nick Patrik Symon Serg";
+            outputStream.write(names.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
