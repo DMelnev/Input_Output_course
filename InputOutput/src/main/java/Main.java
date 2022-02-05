@@ -101,10 +101,12 @@ public class Main {
                 a = input.next();
                 outputStream.write("\n".getBytes());
             }
+
             outputStream.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         StringBuilder result = new StringBuilder();
         char[] array = new char[32];
         try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
