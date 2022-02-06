@@ -120,7 +120,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 //    static int bubbleBest(int[] array) {
