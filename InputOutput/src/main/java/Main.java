@@ -93,32 +93,46 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        Scanner input = new Scanner(System.in);
-        String a = "";
-        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file, true))) {
-            while (!a.equals("Выход")) {
-                outputStream.write(a.getBytes());
-                a = input.next();
-                outputStream.write("\n".getBytes());
-            }
+//        Scanner input = new Scanner(System.in);
+//        String a = "";
+//        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file, true))) {
+//            while (!a.equals("Выход")) {
+//                outputStream.write(a.getBytes());
+//                a = input.next();
+//                outputStream.write("\n".getBytes());
+//            }
+//
+//            outputStream.flush();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        StringBuilder result = new StringBuilder();
+//        char[] array = new char[32];
+//        try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
+//            int count = reader.read(array);
+//            while (count > 0) {
+//                result.append(new String(array, 0, count));
+////                result.append("\n");
+//                count = reader.read(array);
+//            }
+//            System.out.println(result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-            outputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")){
+            randomAccessFile.seek(10);
+            randomAccessFile.writeBytes("**********************************");
+            randomAccessFile.seek(50);
+            randomAccessFile.writeBytes("**********************************");
+            randomAccessFile.seek(0);
+            byte[] array = new byte[1024];
+            randomAccessFile.read(array);
+            System.out.println(new String(array));
 
-        StringBuilder result = new StringBuilder();
-        char[] array = new char[32];
-        try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
-            int count = reader.read(array);
-            while (count > 0) {
-                result.append(new String(array, 0, count));
-//                result.append("\n");
-                count = reader.read(array);
-            }
-            System.out.println(result);
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e){
+
         }
     }
 
