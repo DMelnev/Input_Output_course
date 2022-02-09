@@ -197,13 +197,12 @@ public class Main {
 
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
             ArrayList<Cat> catFile = (ArrayList<Cat>) objectInputStream.readObject();
-            for(Cat cat:catFile){
+            for (Cat cat : catFile) {
                 System.out.println(cat);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
