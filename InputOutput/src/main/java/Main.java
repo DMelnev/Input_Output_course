@@ -120,18 +120,38 @@ public class Main {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        Scanner input = new Scanner(System.in);
+        String a = "";
+        int page = 0;
+        int SHEET = 3;
 
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")){
-            randomAccessFile.seek(10);
-            randomAccessFile.writeBytes("**********************************");
-            randomAccessFile.seek(50);
-            randomAccessFile.writeBytes("**********************************");
-            randomAccessFile.seek(0);
-            byte[] array = new byte[1024];
-            randomAccessFile.read(array);
-            System.out.println(new String(array));
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
+            while (!a.equals("stop")) {
+                System.out.print("Enter page number or \"stop\": ");
+                a = input.next();
 
-        }catch (Exception e){
+                try {
+                    page = Integer.parseInt(a);
+                } catch (NumberFormatException e) {
+                    page = 0;
+                }
+                System.out.println();
+                randomAccessFile.seek((long) page * SHEET);
+                byte[] array = new byte[SHEET];
+                randomAccessFile.read(array);
+                System.out.println(new String(array));
+
+            }
+
+//            randomAccessFile.writeBytes("**********************************");
+//            randomAccessFile.seek(50);
+//            randomAccessFile.writeBytes("**********************************");
+//            randomAccessFile.seek(0);
+//
+//            randomAccessFile.read(array);
+//            System.out.println(new String(array));
+
+        } catch (Exception e) {
 
         }
     }
