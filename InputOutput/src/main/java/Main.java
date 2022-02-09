@@ -154,12 +154,12 @@ public class Main {
 //        } catch (Exception e) {
 //
 //        }
-        File file = new File("users.ini");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        File file = new File("users.ini");
+//        try {
+//            file.createNewFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //        User user = new User("Ivan", "Petrov", 26);
 //
 //        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
@@ -168,12 +168,44 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
-            User user = (User) objectInputStream.readObject();
-            System.out.println(user);
-        }catch (Exception e){
+//        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
+//            User user = (User) objectInputStream.readObject();
+//            System.out.println(user);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
+        File file = new File("cats.txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        List<Cat> cats = new ArrayList<>();
+        cats.add(new Cat("Bob", "asd", 12));
+        cats.add(new Cat("Lob", "asd", 21));
+        cats.add(new Cat("Bolt", "dfg", 18));
+        cats.add(new Cat("Salt", "dfg", 16));
+        cats.add(new Cat("Louf", "ghj", 17));
+        cats.add(new Cat("Leak", "ghj", 25));
+
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+            objectOutputStream.writeObject(cats);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
+            ArrayList<Cat> catFile = (ArrayList<Cat>) objectInputStream.readObject();
+            for(Cat cat:catFile){
+                System.out.println(cat);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 //    static int bubbleBest(int[] array) {
