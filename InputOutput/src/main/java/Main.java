@@ -37,7 +37,7 @@ public class Main {
 //            System.out.println(file.getAbsolutePath());
 //        }
 
-        File file = new File("1.txt");
+//        File file = new File("1.txt");
 //        try {
 //            file.createNewFile();
 //        } catch (IOException e) {
@@ -120,39 +120,59 @@ public class Main {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        Scanner input = new Scanner(System.in);
-        String a = "";
-        int page = 0;
-        int SHEET = 3;
-
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
-            while (!a.equals("stop")) {
-                System.out.print("Enter page number or \"stop\": ");
-                a = input.next();
-
-                try {
-                    page = Integer.parseInt(a);
-                } catch (NumberFormatException e) {
-                    page = 0;
-                }
-                System.out.println();
-                randomAccessFile.seek((long) page * SHEET);
-                byte[] array = new byte[SHEET];
-                randomAccessFile.read(array);
-                System.out.println(new String(array));
-
-            }
-
-//            randomAccessFile.writeBytes("**********************************");
-//            randomAccessFile.seek(50);
-//            randomAccessFile.writeBytes("**********************************");
-//            randomAccessFile.seek(0);
+//        Scanner input = new Scanner(System.in);
+//        String a = "";
+//        int page = 0;
+//        int SHEET = 3;
 //
-//            randomAccessFile.read(array);
-//            System.out.println(new String(array));
+//        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
+//            while (!a.equals("stop")) {
+//                System.out.print("Enter page number or \"stop\": ");
+//                a = input.next();
+//
+//                try {
+//                    page = Integer.parseInt(a);
+//                } catch (NumberFormatException e) {
+//                    page = 0;
+//                }
+//                System.out.println();
+//                randomAccessFile.seek((long) page * SHEET);
+//                byte[] array = new byte[SHEET];
+//                randomAccessFile.read(array);
+//                System.out.println(new String(array));
+//
+//            }
+//
+////            randomAccessFile.writeBytes("**********************************");
+////            randomAccessFile.seek(50);
+////            randomAccessFile.writeBytes("**********************************");
+////            randomAccessFile.seek(0);
+////
+////            randomAccessFile.read(array);
+////            System.out.println(new String(array));
+//
+//        } catch (Exception e) {
+//
+//        }
+        File file = new File("users.ini");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        User user = new User("Ivan", "Petrov", 26);
+//
+//        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+//            outputStream.writeObject(user);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-        } catch (Exception e) {
-
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
+            User user = (User) objectInputStream.readObject();
+            System.out.println(user);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
